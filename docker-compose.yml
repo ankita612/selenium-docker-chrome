@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+  selenium-hub:
+    image: selenium/hub
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:15672"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    environment:
+      - GRID_MAX_SESSION=15
+      - GRID_MAX_INSTANCES=20
+      - GRID_TIMEOUT=180000
+      - GRID_BROWSER_TIMEOUT=180000
+    restart: always
+  chrome:
+    restart: always
+    image: selenium/node-chrome
+#    command: bash -c "rm /tmp/.X99-lock || echo 'Lock not found, continuing normal startup' && export no_proxy=.local && /opt/bin/entry_point.sh"
+    depends_on:
+      - selenium-hub
+    stdin_open: true
+    environment:
+      - HUB_PORT_4444_TCP_ADDR=selenium-hub
+      - HUB_PORT_4444_TCP_PORT=4444
+      - DBUS_SESSION_BUS_ADDRESS=/dev/null
+    volumes:
+      - /dev/shm:/dev/shm
+    shm_size: 2g
+
