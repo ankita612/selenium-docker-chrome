@@ -62,10 +62,15 @@ Here in the script Task on bamboo:
    all the nodes are available before we start exceuting tests.
    
    `until [ "$(curl 'http://localhost:4444/grid/api/hub/status' | sed s/[{:}]//g | sed s/\"//g | awk -v k="text" '{split($1,a,","); print a[1]; print a[19]}' | sed 'N;s/\n//')" == "successtrueslotCountsfree$NUM_NODE" ]; do
+        
         echo "free slots"
+        
         curl 'http://localhost:4444/grid/api/hub/status' | sed s/[{:}]//g | sed s/\"//g | awk -v k="text" '{split($1,a,","); print a[1]; print a[19]}' | sed 'N;s/\n//'
+        
         sleep 1
+        
         echo "Wait for Selenium hub to load"
     done
+    
     echo "All 10 slots are free now"
 `
