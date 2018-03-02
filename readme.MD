@@ -67,3 +67,6 @@ Here in the script Task on bamboo:
 This line checks the hub status to extract the status and free slot value from:
 
 `{"success":true,"capabilityMatcher":"org.openqa.grid.internal.utils.DefaultCapabilityMatcher","newSessionWaitTimeout":-1,"throwOnCapabilityNotPresent":true,"registry":"org.openqa.grid.internal.DefaultGridRegistry","cleanUpCycle":5000,"custom":{},"host":"172.18.0.3","maxSession":20,"servlets":[],"withoutServlets":[],"browserTimeout":120000,"debug":false,"jettyMaxThreads":-1,"port":4444,"role":"hub","timeout":120000,"newSessionRequestCount":0,"slotCounts":{"free":0,"total":0}}`
+
+
+make sure you do not run your test until all the nodes are available and thus avoid page crashing and key not found error
