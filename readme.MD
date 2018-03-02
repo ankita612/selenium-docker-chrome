@@ -61,7 +61,8 @@ Here in the script Task on bamboo:
    To make sure this does not happen, we are checking hub status first in the entrypoint.sh and making sure 
    all the nodes are available before we start exceuting tests.
    
-   `until [ "$(curl 'http://localhost:4444/grid/api/hub/status' | sed s/[{:}]//g | sed s/\"//g | awk -v k="text" '{split($1,a,","); print a[1]; print a[19]}' | sed 'N;s/\n//')" == "successtrueslotCountsfree$NUM_NODE" ]; do
+   `
+    until [ "$(curl 'http://localhost:4444/grid/api/hub/status' | sed s/[{:}]//g | sed s/\"//g | awk -v k="text" '{split($1,a,","); print a[1]; print a[19]}' | sed 'N;s/\n//')" == "successtrueslotCountsfree$NUM_NODE" ]; do
         
         echo "free slots"
         
